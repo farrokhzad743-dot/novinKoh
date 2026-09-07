@@ -37,36 +37,36 @@ const news = [
     title: 'تداوم خدمات آبرسانی و پشتیبانی از عشایر شهرستان کهگیلویه',
     excerpt: 'خدمات آبرسانی سیار و توزیع اقلام مورد نیاز عشایر شهرستان کهگیلویه در سال ۱۴۰۴ به صورت مستمر توسط شرکت تعاونی عشایری کوه نور دهدشت انجام شده است.',
     body: 'خدمات آبرسانی سیار با تانکر به عشایر شهرستان کهگیلویه توسط شرکت تعاونی عشایری کوه نور دهدشت به صورت مستمر صورت می پذیرد. آقای پروره مدیرعامل تعاونی عشایری کوه نور دهدشت در همین راستا بیان کردند که طی سال 1404 قریب به 1500 سرویس 12000 لیتری آب شرب با تانکر سیار تحویل عشایر شهرستان کهگیلویه گردیده است. وی افزود سال 1404 خدماتی اعم از توزیع آرد، علوفه دامی، توزیع نفت سفید، توزیع سیلندر گاز مایع و...... به صورت مستمر در اختیار عشایر تحت پوشش و سهامدار شرکت تعاونی قرار گرفته است.',
-    images: ['./Abresani1.jpg','./Abresani2.jpg','./Abresani3.jpg','./Abresani4.jpg','./Abresani5.jpg','./Abresani6.jpg','./Abresani7.jpg','./Abresani8.jpg']
+    images: ['/Abresani1.jpg','/Abresani2.jpg','/Abresani3.jpg','/Abresani4.jpg','/Abresani5.jpg','/Abresani6.jpg','/Abresani7.jpg','/Abresani8.jpg']
   },
   {
     date: '۱۴۰۴/۰۹/۲۱',
     title: 'توزیع نفت سفید به عشایر محترم حوزه',
     excerpt: 'توزیع نفت سفید به عشایر محترم حوزه در محوطه شرکت تعاونی عشایری کوه نور دهدشت انجام شد.',
     body: 'توزیع نفت سفید به عشایر محترم حوزه در محوطهٔ شرکت.',
-    images: ['./NafteSefid1.jpg','./NafteSefid2.jpg']
+    images: ['/NafteSefid1.jpg','/NafteSefid2.jpg']
   },
   {
     date: '۱۴۰۳/۱۲/۲۹',
     title: 'برگزاری مجمع عمومی عادی سالیانه شرکت',
     excerpt: 'جلسه مجمع عمومی عادی سالیانه شرکت تعاونی عشایری کوه نور دهدشت با حضور اکثریت اعضاء برگزار و صورت‌های مالی سال ۱۴۰۳ تصویب شد.',
     body: 'جلسه مجمع عمومی عادی سالیانه سال مالی منتهی به 1403/12/29 شرکت تعاونی عشایری کوه نور دهدشت با حضور اکثریت اعضاء برگزار گردید. در این جلسه صورتهای مالی سال 1403 به تصویب اعضاء مجمع رسید.',
-    images: ['./MajmaeMali1.jpg','./MajmaeMali2.jpg','./MajmaeMali3.jpg','./MajmaeMali4.jpg','./MajmaeMali5.jpg','./MajmaeMali6.jpg','./MajmaeMali7.jpg']
+    images: ['/MajmaeMali1.jpg','/MajmaeMali2.jpg','/MajmaeMali3.jpg','/MajmaeMali4.jpg','/MajmaeMali5.jpg','/MajmaeMali6.jpg','/MajmaeMali7.jpg']
   },
   {
     date: '۱۴۰۰/۱۰/۲۱',
     title: 'برگزاری مجمع عمومی فوق‌ العاده شرکت',
     excerpt: 'جلسه مجمع عمومی بطور فوق العاده شرکت تعاونی عشایری کوه نور دهدشت برگزار و اساسنامه جدید شرکت به تصویب اعضاء رسید.',
     body: 'جلسه مجمع عمومی بطور فوق العاده شرکت تعاونی عشایری کوه نور دهدشت در تاریخ 1400/10/21 رأس ساعت 16 در محل شرکت واقع در دهدشت با حضور اکثریت اعضاء برگزار گردید. در این جلسه اساسنامه جدید شرکت با 70 ماده و 51 تبصره و 135 بند به تصویب اعضاء مجمع رسیده است.',
-    images: ['./Omomi1.jpg','./Omomi2.jpg','./Omomi3.jpg','./Omomi4.jpg']
+    images: ['/Omomi1.jpg','/Omomi2.jpg','/Omomi3.jpg','/Omomi4.jpg']
   }
 ];
 
 const docs = [
-  { title: 'استعلام شناسه ملی', url: './doc-shenase-melli.jpg' },
-  { title: 'ثبت شرکت در دهدشت', url: './doc-sabt-sherkat.jpg' },
-  { title: 'آگهی تأسیس', url: './doc-agahi-tasis.jpg' },
-  { title: 'اساسنامه', url: './asasname.pdf', download: true }
+  { title: 'استعلام شناسه ملی', url: '/doc-shenase-melli.jpg' },
+  { title: 'ثبت شرکت در دهدشت', url: '/doc-sabt-sherkat.jpg' },
+  { title: 'آگهی تأسیس', url: '/doc-agahi-tasis.jpg' },
+  { title: 'اساسنامه', url: '/asasname.pdf', download: true }
 ];
 
 let activeNews = 0;
@@ -77,6 +77,7 @@ let newsSectionVisible = true;
 let previousBodyOverflow = '';
 let currentLightboxImages = [];
 let currentLightboxIndex = 0;
+let lockedScrollY = 0;
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -123,6 +124,20 @@ function renderNews() {
   $$('.news-media', track).forEach(img => hydrateImage(img, img.dataset.pageUrl));
 }
 
+function lockBody() {
+  if (document.body.classList.contains('modal-lock')) return;
+  lockedScrollY = window.scrollY || window.pageYOffset || 0;
+  document.body.style.top = `-${lockedScrollY}px`;
+  document.body.classList.add('modal-lock');
+}
+
+function unlockBodyIfNoModal() {
+  if ($('.modal.open')) return;
+  document.body.classList.remove('modal-lock');
+  document.body.style.top = '';
+  window.scrollTo(0, lockedScrollY);
+}
+
 function openModal(id) {
   const modal = document.getElementById(id);
   if (!modal) return;
@@ -130,7 +145,7 @@ function openModal(id) {
   modal.setAttribute('aria-hidden', 'false');
   lockBody();
   const focusTarget = $('.modal-close', modal);
-  focusTarget?.focus();
+  focusTarget?.focus({ preventScroll: true });
 }
 function closeModal(id) {
   const modal = document.getElementById(id);
@@ -193,7 +208,7 @@ function closeLightbox() { closeModal('lightboxModal'); currentLightboxImages = 
 
 function showContent(slug) {
   const item = content[slug]; if (!item) return;
-  $('#contentModalBody').innerHTML = `<div class="content-modal-body"><span class="eyebrow">معرفی</span><h2 id="contentTitle">${esc(item.title)}</h2><div class="article-meta">متن کامل</div><div class="article-text">${articleParagraphs(item.body)}</div></div>`;
+  $('#contentModalBody').innerHTML = `<div class="content-modal-body"><h2 id="contentTitle">${esc(item.title)}</h2><div class="article-text">${articleParagraphs(item.body)}</div></div>`;
   openModal('contentModal');
 }
 function setActiveDot(index) { activeNews=(index+news.length)%news.length; $$('.dots button').forEach((button,i)=>button.classList.toggle('active',i===activeNews)); }
@@ -212,13 +227,16 @@ function renderDoc(index = 0) {
   if (!doc || !viewer) return;
   $$('.document-tab').forEach((button, i) => button.classList.toggle('active', i === index));
   if (doc.download) {
-    viewer.innerHTML = `<div class="document-state"><span>PDF</span><strong>${esc(doc.title)}</strong><p>نسخه کامل اساسنامه برای مشاهده یا دریافت آماده است.</p><a href="./asasname.pdf" target="_blank" rel="noopener" download="اساسنامه.pdf" class="document-open-link">مشاهده / دانلود اساسنامه</a></div>`;
+    viewer.innerHTML = `<div class="document-state"><span>PDF</span><strong>${esc(doc.title)}</strong><p>نسخه کامل اساسنامه برای مشاهده یا دریافت آماده است.</p><a href="/asasname.pdf" target="_blank" rel="noopener" download="اساسنامه.pdf" class="document-open-link">مشاهده / دانلود اساسنامه</a></div>`;
     return;
   }
-  viewer.innerHTML = `<button class="document-image-button" type="button" aria-label="بزرگ‌نمایی ${esc(doc.title)}"><img id="documentImage" src="${esc(doc.url)}" alt="${esc(doc.title)}" loading="lazy"></button>`;
+  viewer.innerHTML = `<img id="documentImage" src="${esc(doc.url)}" alt="${esc(doc.title)}" loading="lazy" draggable="false">`;
   const image = $('#documentImage', viewer);
+  image?.addEventListener('click', event => {
+    if (event.button !== 0) return;
+    openLightbox([doc.url], 0, doc.title);
+  });
   image?.addEventListener('error', () => setImageFallback(image, doc.title));
-  $('.document-image-button', viewer)?.addEventListener('click', () => openLightbox([doc.url], 0, doc.title));
 }
 
 ['logoLeft'].forEach(id => { const img = document.getElementById(id); if (img) hydrateImage(img, img.dataset.pageUrl); });
