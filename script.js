@@ -212,6 +212,33 @@ function showContent(slug) {
   openModal('contentModal');
 }
 function setActiveDot(index) { activeNews=(index+news.length)%news.length; $$('.dots button').forEach((button,i)=>button.classList.toggle('active',i===activeNews)); }
+function syncNewsFromScroll() {
+  if (!track || !news.length) return;
+  const cards = $$('.news-card', track);
+  if (!cards.length) return;
+  const trackRect = track.getBoundingClientRect();
+  const trackCenter = trackRect.left + trackRect.width / 2;
+  let closestIndex = activeNews;
+  let closestDistance = Infinity;
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const distance = Math.abs((rect.left + rect.width / 2) - trackCenter);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = Number(card.dataset.index);
+    }
+  });
+  if (closestIndex !== activeNews) {
+    activeNews = closestIndex;
+    setActiveDot(activeNews);
+    resetTimerProgress();
+  }
+}
+let newsScrollTimer = null;
+function scheduleNewsTimerRestart() {
+  clearTimeout(newsScrollTimer);
+  newsScrollTimer = setTimeout(() => { syncNewsFromScroll(); restartTimer(); }, 140);
+}
 function goToNews(index,{animate=true}={}) { if(!news.length||!track) return; activeNews=(index+news.length)%news.length; const card=track.querySelector(`[data-index="${activeNews}"]`); card?.scrollIntoView({behavior:animate?'smooth':'auto',block:'nearest',inline:'center'}); setActiveDot(activeNews); resetTimerProgress(); }
 function resetTimerProgress(){ timerStartedAt=performance.now(); const fill=$('#newsTimerFill'); if(fill) fill.style.width='0%'; }
 function stopTimer(){ clearInterval(timer); timer=null; }
@@ -272,8 +299,13 @@ $('#lightboxPrev')?.addEventListener('click', () => moveLightbox(-1));
 $('#lightboxNext')?.addEventListener('click', () => moveLightbox(1));
 
 track?.addEventListener('pointerdown', stopTimer);
-track?.addEventListener('pointerup', restartTimer);
-track?.addEventListener('pointercancel', restartTimer);
+track?.addEventListener('pointerup', scheduleNewsTimerRestart);
+track?.addEventListener('pointercancel', scheduleNewsTimerRestart);
+track?.addEventListener('scroll', () => {
+  stopTimer();
+  syncNewsFromScroll();
+  scheduleNewsTimerRestart();
+}, { passive: true });
 track?.addEventListener('mouseenter', stopTimer);
 track?.addEventListener('mouseleave', restartTimer);
 const newsSection = $('.news-section');
